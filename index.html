@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- What is box sizing?
+What is animation delay?
+Which property you will use to merge cells vertically in grid?
+Which property you will use to merge cells horizontally in grid?
+Explain CSS box model
+what is the difference between display none and visibility hidden? -->
+
+
+Ques1. What is box sizing?
+
+Ans: Box-sizing is a CSS property that controls how the total width and height of an element are calculated. It determines whether padding and borders are included in the element's total width and height, or if they are added to the specified dimensions.
+
+Types of box-sizing:
+box-sizing: content-box (default):
+
+The width and height apply only to the content area.
+Padding and borders are added to the width and height.
+This means that the total size of the element will be the content's size plus any padding and borders.
+Example:
+
+css
+div {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+  box-sizing: content-box;
+}
+The total width of the element will be 200px (content width) + 20px (left padding) + 20px (right padding) + 5px (left border) + 5px (right border), so the total width would be 250px.
+
+box-sizing: border-box:
+
+The width and height apply to the entire element, including padding and border.
+This means that padding and borders are included within the specified width and height, so the total size of the element remains exactly what you set.
+Example:
+
+css
+div {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+  box-sizing: border-box;
+}
+The total width of the element will be exactly 200px, with the content area adjusting to accommodate the padding and borders. The content area width would be calculated as: 200px (total width) - 20px (left padding) - 20px (right padding) - 5px (left border) - 5px (right border) = 150px content width.
+
+Why is box-sizing important?
+Layout control: Using box-sizing: border-box is often recommended because it simplifies layout and makes it easier to control the size of elements, especially when adding padding and borders.
+Consistent sizing: It avoids unexpected size changes when padding or borders are added to an element, ensuring that the element maintains the intended width and height.
+Common usage:
+A common practice in modern web development is to apply box-sizing: border-box to all elements using a CSS reset or globally in the stylesheet. This makes layout calculations more predictable:
+
+css
+* {
+  box-sizing: border-box;
+}
+This rule ensures that all elements on the page use border-box, making it easier to design layouts and avoid the need to adjust for padding and borders separately.
+
+
+
+
+
+
+Ques2. What is animation delay?
+
+Ans: animation-delay is a CSS property that specifies the amount of time to wait before starting an animation. It defines a delay before the animation begins after it is triggered (for example, when the page loads or when a user interacts with an element).
+
+Syntax:
+css
+animation-delay: time;
+time: The amount of time to wait before the animation starts. It can be specified in seconds (s) or milliseconds (ms).
+Example:
+css
+div {
+  animation-name: slide;
+  animation-duration: 2s;
+  animation-delay: 1s; /* Delay the animation for 1 second */
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100px);
+  }
+}
+In this example:
+
+The animation slide will last for 2 seconds (specified by animation-duration).
+The animation will start after a 1-second delay (specified by animation-delay).
+Key points:
+Animation starts after the specified delay: If the delay is set to 2s, the animation won't begin until 2 seconds after the element is triggered.
+Supports multiple values: You can apply different delays for each animation if you have multiple animations on a single element.
+Can be set to negative values: If you use a negative value for animation-delay, the animation will start before the trigger event (essentially making the animation appear as though it started earlier).
+Negative animation-delay example:
+css
+div {
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: -1s; /* Starts the animation 1 second before it is triggered */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+In this case, the fadeIn animation starts 1 second before the trigger event.
+
+Use cases for animation-delay:
+Staggering animations: If you want multiple elements to animate one after another (e.g., a list of items or a sequence of effects), you can use animation-delay to offset their start times.
+Sequential effects: You can delay an animation to create a sequential effect, where one animation begins after another has finished.
+
+
+
+
+
+Ques3. Which property you will use to merge cells vertically in grid?
+
+Ans: To merge cells vertically in a CSS Grid layout, you use the grid-row property.
+
+The grid-row property allows you to specify which rows a grid item should span. To merge cells vertically, you can set the grid-row property to span multiple rows.
+
+Syntax:
+css
+grid-row: start / end;
+start: Defines where the item starts (row number or line).
+end: Defines where the item ends (row number or line).
+Example: Merging cells vertically
+css
+.container {
+  display: grid;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 100px 100px;
+}
+
+.item {
+  grid-row: 1 / 3; /* Merges the cell from row 1 to row 3 (spanning 2 rows) */
+}
+In this example:
+
+The container has a 3x2 grid (3 rows and 2 columns).
+The .item element is set to span from row 1 to row 3, effectively merging the first two rows vertically into one large cell.
+Key points:
+Merging vertically means an element will occupy multiple rows, which is done using grid-row.
+You can also use grid-column to span columns horizontally, similar to how grid-row works for vertical spans.
+
+
+
+
+
+Ques4. Which property you will use to merge cells horizontally in grid?
+
+Ans: To merge cells horizontally in a CSS Grid layout, you use the grid-column property.
+
+The grid-column property allows you to specify how many columns an item should span. To merge cells horizontally, you can set the grid-column property to span across multiple columns.
+
+Syntax:
+css
+grid-column: start / end;
+start: Defines where the item starts (column number or line).
+end: Defines where the item ends (column number or line).
+Example: Merging cells horizontally
+css
+
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px;
+}
+
+.item {
+  grid-column: 1 / 3; /* Merges the cell from column 1 to column 3 (spanning 2 columns) */
+}
+In this example:
+
+The container has a 2x3 grid (2 rows and 3 columns).
+The .item element is set to span from column 1 to column 3, effectively merging the first two columns horizontally into one large cell.
+Key points:
+Merging horizontally means an element will occupy multiple columns, which is done using grid-column.
+You can also use grid-row to span rows vertically, similar to how grid-column works for horizontal spans.
+
+
+
+
+
+Ques5. Explain CSS box model
+
+Ans: The CSS Box Model is a fundamental concept in web design and layout. It describes the rectangular boxes that are generated for elements on a webpage, and it defines how the size of these elements is calculated and how space is distributed around them.
+
+The Box Model consists of the following components, from the inside out:
+
+1. Content
+The content area is where the actual content of the element, like text or images, is displayed.
+The width and height of the content area are set using the width and height properties in CSS.
+This is the innermost part of the box.
+2. Padding
+Padding is the space between the content and the border.
+Padding is transparent and can be set using the padding property.
+It adds space inside the element, around the content.
+You can set padding on all four sides (top, right, bottom, left) individually or use shorthand properties.
+Example:
+
+css
+div {
+  padding: 20px; /* Padding of 20px on all sides */
+}
+3. Border
+Border wraps around the padding (if any) and the content area.
+Borders have a width, style (e.g., solid, dotted), and color, which can be set using the border property.
+The border is visible and surrounds the padding and content areas.
+Example:
+
+css
+div {
+  border: 2px solid black; /* 2px wide, solid, black border */
+}
+4. Margin
+Margin is the space outside the border, between the element and other elements on the page.
+Margins are transparent and can be set using the margin property.
+The margin creates space between the element and its neighbors.
+Example:
+
+css
+
+div {
+  margin: 20px; /* Margin of 20px on all sides */
+}
+Full Box Model Structure:
+Content → The actual content (text, images, etc.)
+Padding → Space around the content, inside the border.
+Border → Surrounds the padding and content.
+Margin → Space outside the border, between this element and other elements.
+Visual Representation of the Box Model:
+lua
+
++-----------------------------+
+|        Margin               |
+|  +-----------------------+  |
+|  |      Border           |  |
+|  |  +-----------------+  |  |
+|  |  |   Padding       |  |  |
+|  |  |  +---------+    |  |  |
+|  |  |  | Content |    |  |  |
+|  |  |  +---------+    |  |  |
+|  |  +-----------------+  |  |
+|  +-----------------------+  |
++-----------------------------+
+Box Model in Action:
+Given the following CSS:
+
+css
+div {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 15px;
+}
+Content area: 200px (width of the content).
+Padding: 20px on all sides.
+Border: 5px on all sides.
+Margin: 15px on all sides.
+The total width of the element would be:
+
+css
+
+Width = content + padding + border = 200px + 20px + 20px + 5px + 5px = 250px
+Similarly, the total height would be calculated as:
+
+css
+Height = content height + padding + border (top and bottom) = height of content + padding + border.
+Box-sizing Property:
+By default, when you set the width and height of an element, it only applies to the content area. This means that padding and borders are added outside the element's width and height, making the element larger than you might expect.
+
+To change this behavior and include padding and borders in the element's width and height calculation, you can use the box-sizing property with the value border-box.
+
+Example:
+css
+
+div {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+}
+In this case, the total width of the element will remain 200px, and the padding and borders will be included inside the 200px width, rather than adding extra width to the element.
+
+Key Takeaways:
+The box model consists of the content, padding, border, and margin.
+By default, width and height apply only to the content area.
+You can adjust the box-sizing to change how the width and height are calculated (with border-box including padding and borders in the total width/height).
+
+
+
+
+
+
+
+Ques6. what is the difference between display none and visibility hidden?
+
+Ans: The display: none and visibility: hidden properties in CSS both make elements invisible, but they behave differently in terms of layout and how they affect the page structure. Here's the key difference:
+
+1. display: none
+Removes the element from the document flow: When you apply display: none to an element, it is completely removed from the layout, as though the element does not exist in the document at all. This means it no longer takes up space or affects the positioning of other elements.
+Does not reserve space: The element is effectively invisible and non-interactive, and the space it occupied is collapsed.
+Example:
+
+css
+div {
+  display: none;
+}
+In this case, the div is completely removed from the layout and doesn't take up any space on the page.
+
+2. visibility: hidden
+Keeps the element in the document flow: When you use visibility: hidden, the element becomes invisible, but it still occupies space in the layout. Other elements will behave as though the element is still there, and the element will still take up its original size and space in the flow.
+The element is not interactive: Although the element is still visible, it cannot be interacted with, meaning that clicks, hover effects, or other interactions will not affect it.
+Example:
+
+css
+div {
+  visibility: hidden;
+}
+In this case, the div is invisible but still occupies space and affects the layout of the page, just like an element that is not hidden.
+
+Key Differences:
+Feature	display: none	visibility: hidden
+Visibility	The element is not visible or rendered at all.	The element is invisible but still occupies space.
+Layout Impact	The element is removed from the document flow (no space is reserved).	The element still takes up space in the layout.
+Interaction	The element is not interactive (since it doesn't exist in the layout).	The element is not interactive but still in the layout.
+Use case	Hiding elements dynamically (e.g., toggle visibility) without affecting layout.	Hiding elements but keeping them in the layout, often used for accessibility reasons or transitions.
+When to Use:
+display: none is useful when you want to completely hide an element and not have it affect the page layout (e.g., for dynamic content or modal popups).
+visibility: hidden is useful when you want to hide the element but maintain its space, for example, when you are transitioning an element's visibility or need to hide something temporarily but keep the layout intact.
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
